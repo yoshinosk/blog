@@ -110,22 +110,21 @@ module.exports = {
                 populate: { path: 'from', select: 'nickname avatar' }
             })
             .populate('from', 'nickname avatar')
+            .lean()
             
-
-
-        for (let i = 0; i < list.length; i++) {
-            let item = list[i];
-            if (!item.comment) continue;
-
-            let c = list.find(com => {
-                return com._id.toString() == item.comment.toString()
-            });
-            if (!c) continue;
-            if (!c.children) c.children = [item]
-            else c.children.push(item)
+        // 先筛选出顶级楼层
+        let baseList = list.filter(item=> !item.comment && !item.reply);
+        for(let item of list){
+            if(!item.comment ) continue;
+            let parent = baseList.find(p=>p._id.toString() == item.comment.toString() );
+            if(parent){
+                if(!parent.children) parent.children = [];
+                parent.children.push(item);
+            }
         }
+        
         res.status(200).send(Response.success('获取评论列表成功', {
-            list: list.filter(item => !item.comment && !item.reply),
+            list: baseList,
             total: list.length
         }))
     },

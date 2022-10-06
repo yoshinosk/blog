@@ -5,6 +5,7 @@
     <div class="wrapper container">
       <nuxt />
     </div>
+    <back-top></back-top>
     <my-footer></my-footer>
   </div>
 </template>
@@ -15,7 +16,7 @@ export default {
     scrollToTop: true,
     head() {
         return {
-            title: `${this.siteName} - 一个动漫主题的博客`
+            title: `${this.siteName} - 兴趣使然 一个动漫主题的博客`
         };
     },
     methods: {
@@ -39,7 +40,7 @@ export default {
         },
     },
     mounted() {
-      console.log('process.env.NODE_ENV',process.env.NODE_ENV)
+      // console.log('process.env.NODE_ENV',process.env.NODE_ENV)
     },
     computed: {
         ...mapState(["errMsg", "resMsg"]),

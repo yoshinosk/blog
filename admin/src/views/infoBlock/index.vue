@@ -83,7 +83,7 @@
                         <el-table-column label="操作" align="center" width="70px">
                             <template v-slot="{ row, $index }">
                                 <el-button type="text" icon="el-icon-edit" @click="handleEditItem($index, row)">编辑</el-button>
-                                <el-button type="text" icon="el-icon-delete" class="red" @click="handleDeleteItem(row, form)"
+                                <el-button type="text" icon="el-icon-delete" class="red" @click="handleDeleteItem($index, form)"
                                     >删除</el-button
                                 >
                             </template>
@@ -217,11 +217,8 @@ export default {
                 });
             });
         },
-        handleDeleteItem(row, form) {
-            form.list.splice(
-                form.list.findIndex((item) => item.name == row.name),
-                1
-            );
+        handleDeleteItem(index, form) {
+            form.list.splice(index, 1);
         }
     },
     components: { SelectImage }

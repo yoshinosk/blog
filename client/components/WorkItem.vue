@@ -5,13 +5,13 @@
       </div>
       <div class="info">
         <h4 class="line-1 w-100 text-center" :title="work.title">{{ work.title }}</h4>
-        <div class="desc">
-          {{ work.text }}
+        <div class="desc" :title="work.desc">
+          {{ work.desc }}
         </div>
-        <div class="tag">
-          <label class="label label-info" v-for="tag in work.tag" :key="tag">
-            <span>{{ tag }}</span>
-          </label>
+        <div class="tag mt-3">
+         <b-badge class="mr-2" variant="info" v-for="item in work.tag" :key="item">
+            {{ item }}
+          </b-badge>
         </div>
       </div>
     </div>
