@@ -7,4 +7,5 @@ export default axios => ({
   addMsg: data => axios.post('/api/board/add', data, { showMsg: true }),
   signInTolRank: () => axios.get('/api/rank/signInTol'),
   signInConRank: () => axios.get('/api/rank/signInCon'),
+  getLinks: () => axios.get('/api/links'),
 })

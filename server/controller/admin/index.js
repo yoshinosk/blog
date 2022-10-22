@@ -8,6 +8,7 @@ const article = require('./article'),
     Response = require('../../utils/response'),
     User = require('../../models/user'),
     board = require('./msgBoard'),
+    links = require('./links'),
     { Article } = require('../../models/article')
 
 
@@ -20,6 +21,7 @@ module.exports = {
     setting,
     infoBlock,
     board,
+    links,
     /**
     * @description 获取基础信息
     * @param {Request} req 

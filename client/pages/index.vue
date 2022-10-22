@@ -3,6 +3,7 @@
     <div class="col-md-3 indexLeft">
       <my-info></my-info>
       <article-box class="mb-3" title="热门文章" :list="hotArt"></article-box>
+      <links :list="links"></links>
     </div>
     <div class="col-md-6 indexMiddle">
       <article-list></article-list>
@@ -20,18 +21,22 @@
 
 <script>
 import { mapState } from "vuex";
+import Links from '../components/Links.vue';
 export default {
+  components: { Links },
   scrollToTop: true,
   async fetch({ store }) {
     await store.dispatch("getArticleList");
   },
   async asyncData({ app }) {
-    let [{ data: infoBlock }, { data: hotArt }] = await Promise.all([
+    let [{ data: infoBlock }, { data: hotArt }, { data: links }] = await Promise.all([
       app.$api.site.getInfoBlockList(),
       app.$api.article.getArticleViewsRank(),
+      app.$api.site.getLinks()
     ]);
     return {
       hotArt,
+      links,
       infoBlock: infoBlock.filter((item) => item.status),
     };
   },

@@ -252,6 +252,25 @@ router
     .delete('/board/del', permission('admin.board'), checkSchema({
         id: { notEmpty: true, errorMessage: '缺少参数：留言id' }
     }), validator, admin.board.del)
-// ** 留言板 end **
+    // ** 留言板 end **
+    // ** 友情链接 start ** 
+    .get('/links/list', permission('admin.setting'), admin.links.list)
+    .post('/links/add', permission('admin.setting'), checkSchema({
+        name: { notEmpty: { errorMessage: '缺少参数' } },
+        url: { notEmpty: { errorMessage: '缺少参数' } }
+    }), validator, admin.links.add)
+    .post('/links/edit', permission('admin.setting'), checkSchema({
+        _id: {
+            notEmpty: { errorMessage: '缺少参数' },
+        },
+        name: { notEmpty: { errorMessage: '缺少参数' } },
+        url: { notEmpty: { errorMessage: '缺少参数' } }
 
+    }), validator, admin.links.edit)
+    .delete('/links/del', permission('admin.setting'), checkSchema({
+        id: {
+            notEmpty: { errorMessage: '缺少参数' },
+        }
+    }), validator, admin.links.del)
+// ** 友情链接 end **
 module.exports = router;

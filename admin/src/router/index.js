@@ -89,6 +89,11 @@ export default new Router({
                     component: () => import('@/views/board'),
                     meta: {title:'留言板管理'}
                 },
+                {
+                    path: '/links',
+                    component: () => import('@/views/links'),
+                    meta: {title:'友情链接'}
+                },
             ]
         },
         {

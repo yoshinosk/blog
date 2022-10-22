@@ -2,11 +2,21 @@ const Response = require('../utils/response'),
     { setting } = require('../config/index'),
     InfoBlock = require('../models/infoBlock'),
     MsgBoard = require('../models/msgBoard'),
+    Links = require('../models/links'),
     mint = require('../utils/wordFilter');
 
 module.exports = {
     async test(req, res) {
         res.status(200).send(Response.success(''));
+    },
+    /**
+     * @description 获取友情链接
+     * @param {Request} req 
+     * @param {Response} res 
+     */
+    async getLinks(req, res) {
+        let list = await Links.find().lean();
+        res.status(200).send(Response.success('获取友情链接成功', list))
     },
     /**
      * @description 获取网站设定
@@ -62,7 +72,7 @@ module.exports = {
      * @param {Response} res 
      */
     async addMsg(req, res) {
-        if(!setting.site.allowBoard) return res.status(503).send(Response.error.CLOSED_BOARD);
+        if (!setting.site.allowBoard) return res.status(503).send(Response.error.CLOSED_BOARD);
         let { email, nickname, content } = req.body,
             { ip } = req,
             data = { email, nickname, content, ip };

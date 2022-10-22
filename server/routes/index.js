@@ -7,10 +7,7 @@ const express = require('express'),
   { validator, auth } = require('../utils/middlewares')
 
 
-router.get('/', function (req, res, next) {
-  req.session.count ? (req.session.count++) : (req.session.count = 1)
-  res.send({ c: req.session.count })
-})
+router
   .post('/test', api.test)
   .get('/article', checkSchema({
     id: { isNumeric: true, errorMessage: '参数格式错误' },
@@ -45,5 +42,5 @@ router.get('/', function (req, res, next) {
   }), validator, api.addMsg)
   .get('/rank/signInTol', rank.signInTolRank)
   .get('/rank/signInCon', rank.signInConRank)
-
+  .get('/links', api.getLinks)
 module.exports = router;

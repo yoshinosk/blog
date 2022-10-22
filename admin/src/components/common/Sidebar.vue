@@ -138,6 +138,11 @@ export default {
                     index: '/board',
                     title: '留言板管理'
                 },
+                {
+                    icon: 'el-icon-s-promotion',
+                    index: '/links',
+                    title: '友情链接'
+                },
             ]
         };
     },
